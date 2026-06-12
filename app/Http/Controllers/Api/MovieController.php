@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreMovieRequest;
+use App\Http\Requests\UpdateMovieRequest;
 use App\Http\Resources\MovieResource;
 use App\Models\Movie;
-use Illuminate\Http\Request;
 
 class MovieController extends Controller
 {
@@ -16,18 +17,9 @@ class MovieController extends Controller
         return MovieResource::collection($movies);
     }
 
-    public function store(Request $request)
+    public function store(StoreMovieRequest $request)
     {
-        $validated = $request->validate([
-            'title' => ['required', 'string', 'max:255'],
-            'director' => ['required', 'string', 'max:255'],
-            'genre' => ['required', 'string', 'max:100'],
-            'release_year' => ['required', 'integer', 'digits:4'],
-            'rating' => ['nullable', 'numeric', 'between:0,10'],
-            'synopsis' => ['nullable', 'string'],
-        ]);
-
-        $movie = Movie::create($validated);
+        $movie = Movie::create($request->validated());
 
         return (new MovieResource($movie))
             ->response()
@@ -39,18 +31,9 @@ class MovieController extends Controller
         return new MovieResource($movie);
     }
 
-    public function update(Request $request, Movie $movie)
+    public function update(UpdateMovieRequest $request, Movie $movie)
     {
-        $validated = $request->validate([
-            'title' => ['sometimes', 'required', 'string', 'max:255'],
-            'director' => ['sometimes', 'required', 'string', 'max:255'],
-            'genre' => ['sometimes', 'required', 'string', 'max:100'],
-            'release_year' => ['sometimes', 'required', 'integer', 'digits:4'],
-            'rating' => ['sometimes', 'nullable', 'numeric', 'between:0,10'],
-            'synopsis' => ['sometimes', 'nullable', 'string'],
-        ]);
-
-        $movie->update($validated);
+        $movie->update($request->validated());
 
         return new MovieResource($movie->fresh());
     }
