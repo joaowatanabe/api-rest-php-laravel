@@ -1,58 +1,147 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🎬 Movie API - REST API para Estudos
 
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+  <img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="350" alt="Laravel Logo">
 </p>
 
-## About Laravel
+<p align="center">
+  <img src="https://img.shields.io/badge/PHP-%3E%3D%208.3-8892BF?style=for-the-badge&logo=php" alt="PHP Version">
+  <img src="https://img.shields.io/badge/Laravel-v13.x-FF2D20?style=for-the-badge&logo=laravel" alt="Laravel Version">
+  <img src="https://img.shields.io/badge/SQLite-Database-003B57?style=for-the-badge&logo=sqlite" alt="SQLite">
+  <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License">
+</p>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 📝 Descrição do Projeto
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Esta é uma **API RESTful simples e moderna** para gerenciamento de filmes, desenvolvida com o framework **PHP Laravel 13** e banco de dados **SQLite**. 
 
-## Learning Laravel
+O projeto foi criado com foco em **estudos e práticas de desenvolvimento de APIs**, cobrindo conceitos essenciais do ecossistema Laravel:
+* 📡 **Roteamento de API** utilizando rotas padronizadas (`apiResource`).
+* 🎛️ **Arquitetura MVC** com Controllers específicos para APIs.
+* 🛡️ **Validação robusta de requisições** para garantir a integridade dos dados enviados.
+* 📦 **Transformação de Dados** utilizando Laravel `API Resources` para formatar e padronizar as respostas JSON.
+* 🗄️ **Banco de dados SQLite** configurado por padrão, tornando o setup inicial extremamente leve e rápido.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+---
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 🛠️ Tecnologias Utilizadas
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+* **Linguagem:** PHP >= 8.3
+* **Framework:** Laravel 13.x
+* **Banco de Dados:** SQLite
+* **Gerenciador de Dependências:** Composer
 
-## Agentic Development
+---
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+## 🚀 Como Executar o Projeto
 
+Siga os passos abaixo para rodar o projeto localmente em sua máquina.
+
+### Pré-requisitos
+* **PHP** (versão 8.3 ou superior)
+* **Composer** instalado globalmente
+
+### 1. Clonar o Repositório
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+git clone https://github.com/joaowatanabe/api-rest-php-laravel.git
+cd api-rest-php-laravel
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+### 2. Configuração Rápida (Script Automatizado)
+O projeto possui um script configurado no `composer.json` para facilitar a inicialização. Execute:
+```bash
+composer run setup
+```
+*Este comando irá instalar as dependências do Composer, criar e configurar o arquivo `.env`, gerar a chave da aplicação (`APP_KEY`), criar o banco SQLite local e rodar as migrações.*
 
-## Contributing
+*(Caso prefira fazer de forma manual, você pode executar `composer install`, copiar o `.env.example` para `.env`, gerar a chave com `php artisan key:generate` e rodar as migrações com `php artisan migrate`).*
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 3. Executar o Servidor de Desenvolvimento
+Inicie o servidor local do Laravel utilizando:
+```bash
+composer run dev
+```
+ou simplesmente:
+```bash
+php artisan serve
+```
 
-## Code of Conduct
+A API estará disponível por padrão em: `http://localhost:8000/api`
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+---
 
-## Security Vulnerabilities
+## 📡 Endpoints da API
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+A API expõe as operações tradicionais de CRUD para o recurso `movies`. Todas as respostas são retornadas no formato JSON.
 
-## License
+| Método | Endpoint | Descrição |
+| :--- | :--- | :--- |
+| **GET** | `/api/movies` | Retorna a lista de filmes (paginada de 10 em 10) |
+| **POST** | `/api/movies` | Cadastra um novo filme no sistema |
+| **GET** | `/api/movies/{id}` | Retorna os detalhes de um filme específico |
+| **PUT/PATCH** | `/api/movies/{id}` | Atualiza os dados de um filme existente |
+| **DELETE** | `/api/movies/{id}` | Remove um filme do banco de dados |
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+---
+
+## 📥 Exemplos de Payload
+
+### 1. Cadastrar um Filme (`POST /api/movies`)
+
+**Corpo da Requisição (JSON):**
+```json
+{
+  "title": "Inception",
+  "director": "Christopher Nolan",
+  "genre": "Sci-Fi",
+  "release_year": 2010,
+  "rating": 8.8,
+  "synopsis": "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O."
+}
+```
+
+**Regras de Validação:**
+* `title` (obrigatório, string, max 255)
+* `director` (obrigatório, string, max 255)
+* `genre` (obrigatório, string, max 100)
+* `release_year` (obrigatório, inteiro, 4 dígitos)
+* `rating` (opcional, numérico entre 0 e 10)
+* `synopsis` (opcional, string)
+
+**Resposta de Sucesso (Status `201 Created`):**
+```json
+{
+  "data": {
+    "id": 1,
+    "title": "Inception",
+    "director": "Christopher Nolan",
+    "genre": "Sci-Fi",
+    "release_year": 2010,
+    "rating": "8.8",
+    "synopsis": "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.",
+    "created_at": "2026-06-11T21:10:00.000000Z",
+    "updated_at": "2026-06-11T21:10:00.000000Z"
+  }
+}
+```
+
+---
+
+## 🧪 Rodando os Testes
+
+Para rodar a suíte de testes da aplicação, utilize:
+```bash
+composer run test
+```
+ou
+```bash
+php artisan test
+```
+
+---
+
+## 📄 Licença
+
+Este projeto é de código aberto e está sob os termos da licença [MIT](LICENSE).
