@@ -29,7 +29,9 @@ class MovieController extends Controller
 
         $movie = Movie::create($validated);
 
-        return new MovieResource($movie);
+        return (new MovieResource($movie))
+            ->response()
+            ->setStatusCode(201);
     }
 
     public function show(Movie $movie)
@@ -44,21 +46,19 @@ class MovieController extends Controller
             'director' => ['sometimes', 'required', 'string', 'max:255'],
             'genre' => ['sometimes', 'required', 'string', 'max:100'],
             'release_year' => ['sometimes', 'required', 'integer', 'digits:4'],
-            'rating' => ['nullable', 'numeric', 'between:0,10'],
-            'synopsis' => ['nullable', 'string'],
+            'rating' => ['sometimes', 'nullable', 'numeric', 'between:0,10'],
+            'synopsis' => ['sometimes', 'nullable', 'string'],
         ]);
 
         $movie->update($validated);
 
-        return new MovieResource($movie);
+        return new MovieResource($movie->fresh());
     }
 
     public function destroy(Movie $movie)
     {
         $movie->delete();
 
-        return response()->json([
-            'message' => 'Filme removido com sucesso.'
-        ], 200);
+        return response()->json(null, 204);
     }
 }
